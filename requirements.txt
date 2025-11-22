@@ -11,3 +11,4 @@ faiss-cpu
 transformers
 streamlit
 pdfplumber
+pytest

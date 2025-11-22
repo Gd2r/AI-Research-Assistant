@@ -35,13 +35,14 @@ def store_embeddings(embeddings):
 
 def main():
     import glob
+    from config import DATA_DIR, INDEX_PATH
     
     # Setup paths
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, 'data')
+    # base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # data_dir = os.path.join(base_dir, 'data')
     
     # Find a PDF to test
-    pdf_files = glob.glob(os.path.join(data_dir, '*.pdf'))
+    pdf_files = glob.glob(os.path.join(DATA_DIR, '*.pdf'))
     if not pdf_files:
         print("No PDFs found to test.")
         return
@@ -68,9 +69,9 @@ def main():
     print(f"Verification: Index contains {index.ntotal} vectors.")
     
     # Optional: Save the index to disk
-    index_path = os.path.join(base_dir, 'faiss_index.bin')
-    faiss.write_index(index, index_path)
-    print(f"Index saved to {index_path}")
+    # index_path = os.path.join(base_dir, 'faiss_index.bin')
+    faiss.write_index(index, INDEX_PATH)
+    print(f"Index saved to {INDEX_PATH}")
 
 if __name__ == "__main__":
     main()

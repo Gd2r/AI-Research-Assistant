@@ -8,10 +8,11 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 try:
     from chunk_text import chunk_text
     from extract_text import extract_text_from_paper
+    from config import MODEL_NAME, DATA_DIR
 except ImportError:
     pass # Handle imports differently if needed, but sys.path should fix it
 
-def embed_chunks(chunks, model_name='all-MiniLM-L6-v2'):
+def embed_chunks(chunks, model_name=MODEL_NAME):
     """
     Converts text chunks into embeddings using a SentenceTransformer model.
     
@@ -30,11 +31,11 @@ def main():
     import glob
     
     # Setup paths
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, 'data')
+    # base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # data_dir = os.path.join(base_dir, 'data')
     
     # Find a PDF to test
-    pdf_files = glob.glob(os.path.join(data_dir, '*.pdf'))
+    pdf_files = glob.glob(os.path.join(DATA_DIR, '*.pdf'))
     if not pdf_files:
         print("No PDFs found to test.")
         return

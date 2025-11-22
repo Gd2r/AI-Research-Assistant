@@ -19,14 +19,15 @@ def extract_text_from_paper(pdf_path):
 def main():
     # Define the data directory relative to this script
     # Assuming script is in src/ and data is in ../data/
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, 'data')
+    # base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # data_dir = os.path.join(base_dir, 'data')
+    from config import DATA_DIR
     
     # Find all PDF files
-    pdf_files = glob.glob(os.path.join(data_dir, '*.pdf'))
+    pdf_files = glob.glob(os.path.join(DATA_DIR, '*.pdf'))
     
     if not pdf_files:
-        print(f"No PDF files found in {data_dir}")
+        print(f"No PDF files found in {DATA_DIR}")
         return
 
     print(f"Found {len(pdf_files)} PDF files.")

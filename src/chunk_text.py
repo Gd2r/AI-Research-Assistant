@@ -22,11 +22,10 @@ def chunk_text(text, chunk_size=500):
 
 def main():
     # Setup paths
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, 'data')
+    from config import DATA_DIR, CHUNK_SIZE
     
     # Find a PDF to test with
-    pdf_files = glob.glob(os.path.join(data_dir, '*.pdf'))
+    pdf_files = glob.glob(os.path.join(DATA_DIR, '*.pdf'))
     
     if not pdf_files:
         print("No PDFs found to test chunking.")
@@ -43,7 +42,7 @@ def main():
         return
 
     # Chunk text
-    chunks = chunk_text(text, chunk_size=500)
+    chunks = chunk_text(text, chunk_size=CHUNK_SIZE)
     print(f"Total chunks created: {len(chunks)}")
     
     if chunks:

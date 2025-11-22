@@ -14,6 +14,7 @@ from chunk_text import chunk_text
 from embed_text import embed_chunks
 from store_embeddings import store_embeddings
 from search import search_query
+from config import DATA_DIR, MODEL_NAME
 
 @st.cache_resource
 def initialize_system():
@@ -21,12 +22,12 @@ def initialize_system():
     Loads data, processes PDFs, and builds the search index.
     Cached to avoid reloading on every interaction.
     """
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, 'data')
+    # base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # data_dir = os.path.join(base_dir, 'data')
     
-    pdf_files = glob.glob(os.path.join(data_dir, '*.pdf'))
+    pdf_files = glob.glob(os.path.join(DATA_DIR, '*.pdf'))
     if not pdf_files:
-        st.error(f"No PDF files found in {data_dir}!")
+        st.error(f"No PDF files found in {DATA_DIR}!")
         return None, None, None
 
     all_chunks = []
@@ -53,7 +54,7 @@ def initialize_system():
         # However, search_query expects 'model' to be passed. 
         # Let's instantiate the model here to pass it back, or refactor search_query.
         # For now, let's just load it here to keep the signature consistent.
-        model = SentenceTransformer('all-MiniLM-L6-v2')
+        model = SentenceTransformer(MODEL_NAME)
         
     return model, index, all_chunks
 

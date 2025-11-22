@@ -32,14 +32,15 @@ def search_query(query, model, index, k=3):
 
 def main():
     import glob
+    from config import DATA_DIR, MODEL_NAME
     
     # Setup paths
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_dir = os.path.join(base_dir, 'data')
+    # base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # data_dir = os.path.join(base_dir, 'data')
     
     # 1. Setup Data (Re-running pipeline to get chunks in memory)
     print("--- Setting up Search Index ---")
-    pdf_files = glob.glob(os.path.join(data_dir, '*.pdf'))
+    pdf_files = glob.glob(os.path.join(DATA_DIR, '*.pdf'))
     if not pdf_files:
         print("No PDFs found.")
         return
@@ -50,8 +51,8 @@ def main():
     chunks = chunk_text(text)
     
     # 2. Load Model
-    model_name = 'all-MiniLM-L6-v2'
-    model = SentenceTransformer(model_name)
+    # model_name = 'all-MiniLM-L6-v2'
+    model = SentenceTransformer(MODEL_NAME)
     
     # 3. Create Index
     embeddings = model.encode(chunks)
