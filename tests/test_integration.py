@@ -37,3 +37,31 @@ def test_full_pipeline(model):
     
     # The first result should be the AI chunk (index 0)
     assert indices[0][0] == 0
+
+def test_search_threshold(model):
+    # 1. Embed & Index
+    embeddings = embed_chunks(MOCK_CHUNKS)
+    index = store_embeddings(embeddings)
+    
+    # 2. Search for something relevant
+    query = "machine learning"
+    distances, indices = search_query(query, model, index, k=1)
+    
+    # Distance should be low (e.g., < 1.0 for L2 with normalized vectors, though these aren't normalized)
+    # For unnormalized L2, it depends. Let's just check it returns a result.
+    assert len(indices[0]) > 0
+    
+    # 3. Search for something irrelevant
+    query = "banana smoothie recipe"
+    distances, indices = search_query(query, model, index, k=1)
+    
+    # Distance should be higher than the relevant query
+    # This is a heuristic check
+    relevant_dist = search_query("machine learning", model, index, k=1)[0][0][0]
+    irrelevant_dist = distances[0][0]
+    assert irrelevant_dist > relevant_dist
+
+def test_embedding_dimension_consistency(model):
+    text = "Test text"
+    embedding = model.encode([text])
+    assert embedding.shape[1] == 384

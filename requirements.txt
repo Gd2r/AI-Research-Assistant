@@ -12,3 +12,5 @@ transformers
 streamlit
 pdfplumber
 pytest
+datasets
+accelerate

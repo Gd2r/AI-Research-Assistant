@@ -59,8 +59,25 @@ def initialize_system():
     return model, index, all_chunks
 
 def main():
-    st.title("AI Research Assistant")
-    st.write("Ask questions about your PDF documents.")
+    st.title("Computer Vision Research Assistant")
+    st.write("Ask questions about your CV research papers.")
+
+    # File Upload Section
+    with st.sidebar:
+        st.header("Upload Papers")
+        uploaded_files = st.file_uploader("Upload PDF", type=['pdf'], accept_multiple_files=True)
+        if uploaded_files:
+            if st.button("Process & Index"):
+                with st.spinner("Processing uploaded files..."):
+                    for uploaded_file in uploaded_files:
+                        # Save file to data directory
+                        save_path = os.path.join(DATA_DIR, uploaded_file.name)
+                        with open(save_path, "wb") as f:
+                            f.write(uploaded_file.getbuffer())
+                    st.success(f"Uploaded {len(uploaded_files)} files!")
+                    # Clear cache to force re-indexing on next reload
+                    st.cache_resource.clear()
+                    st.rerun()
 
     model, index, chunks = initialize_system()
 
@@ -76,6 +93,8 @@ def main():
                 if idx < len(chunks):
                     st.markdown(f"**Result {i+1}** (Distance: {distances[0][i]:.4f})")
                     st.info(chunks[idx])
+                    # In a real app, we would track which file this chunk came from
+                    # For now, we just show the text
                 else:
                     st.warning("Index out of bounds.")
 

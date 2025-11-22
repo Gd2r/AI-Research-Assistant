@@ -9,8 +9,7 @@ env/
 .env
 
 # Data
-data/
-*.pdf
+data/*.pdf
 
 # Generated Files
 faiss_index.bin

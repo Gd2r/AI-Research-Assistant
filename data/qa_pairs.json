@@ -1,0 +1,22 @@
+[
+    {
+        "question": "What is the main advantage of ResNet?",
+        "answer": "ResNet introduces skip connections (or residual connections) that allow gradients to flow more easily during backpropagation, enabling the training of very deep networks."
+    },
+    {
+        "question": "How does YOLO achieve real-time object detection?",
+        "answer": "YOLO (You Only Look Once) treats object detection as a single regression problem, predicting bounding boxes and class probabilities directly from full images in one evaluation."
+    },
+    {
+        "question": "What is the purpose of data augmentation in computer vision?",
+        "answer": "Data augmentation increases the diversity of the training set by applying random transformations (like rotation, scaling, flipping) to images, helping to prevent overfitting."
+    },
+    {
+        "question": "Explain the concept of Intersection over Union (IoU).",
+        "answer": "IoU is a metric used to evaluate object detection algorithms. It measures the overlap between the predicted bounding box and the ground truth bounding box divided by their union."
+    },
+    {
+        "question": "What is a Convolutional Neural Network (CNN)?",
+        "answer": "A CNN is a class of deep neural networks, most commonly applied to analyzing visual imagery, which uses convolutional layers to automatically learn spatial hierarchies of features."
+    }
+]

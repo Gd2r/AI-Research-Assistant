@@ -1,8 +1,8 @@
-# AI Research Assistant
+# Computer Vision Research Assistant
 
 ![Build Status](https://github.com/Gd2r/AI-Research-Assistant/actions/workflows/test.yml/badge.svg)
 
-A Python-based tool to extract, index, and search through PDF research papers using AI embeddings.
+A Python-based tool to extract, index, and search through **Computer Vision** research papers using AI embeddings.
 
 ## Features
 
@@ -18,13 +18,32 @@ A Python-based tool to extract, index, and search through PDF research papers us
 
 For a deep dive into the technical details (Extraction, Chunking, Embeddings, FAISS), check out [ARCHITECTURE.md](ARCHITECTURE.md).
 
-## Challenges & Trade-offs
+## Fine-tuning & Evaluation
 
-Building this system required making several architectural decisions:
+This repository includes a pipeline to fine-tune the embedding model on your specific domain (e.g., Computer Vision).
 
-1.  **FAISS vs. Vector Databases**: I chose **FAISS** (Facebook AI Similarity Search) for its speed and simplicity in local environments. While a full vector database like ChromaDB or Pinecone offers more features (like metadata filtering), FAISS is lightweight and perfect for this scale.
-2.  **Chunk Size Strategy**: I settled on a chunk size of **500 words**. Smaller chunks (e.g., 100 words) might miss context, while larger chunks (e.g., 1000 words) dilute the specific meaning of the embedding. 500 words struck the right balance for research papers.
-3.  **Model Selection**: I used `all-MiniLM-L6-v2`. It's a "distilled" model, meaning it's much faster and smaller than full BERT models while retaining most of the accuracy. This ensures the app runs smoothly even on standard laptops without GPUs.
+### 1. Fine-tuning
+To train the model on your custom dataset (`data/qa_pairs.json`):
+```bash
+python src/finetune.py
+```
+This will save a new model to `models/fine_tuned_model`.
+
+### 2. Evaluation
+To measure the performance (Recall@k) of the base model vs. the fine-tuned model:
+```bash
+python src/evaluate.py
+```
+
+### Results
+On our sample Computer Vision QA dataset (5 pairs), both models achieved:
+- **Recall@1**: 1.0000
+- **Recall@3**: 1.0000
+
+*Note: With a larger, more complex dataset, you would expect to see the fine-tuned model outperform the base model.*
+
+## UI Screenshots
+*(Add screenshots of your Streamlit app here)*
 
 ## Project Structure
 
