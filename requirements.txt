@@ -1,0 +1,13 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+jupyter
+notebook
+torch
+sentence-transformers
+faiss-cpu
+transformers
+streamlit
+pdfplumber
