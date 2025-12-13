@@ -43,7 +43,8 @@ On our sample Computer Vision QA dataset (5 pairs), both models achieved:
 *Note: With a larger, more complex dataset, you would expect to see the fine-tuned model outperform the base model.*
 
 ## UI Screenshots
-*(Add screenshots of your Streamlit app here)*
+*<img width="1413" height="773" alt="image" src="https://github.com/user-attachments/assets/b140a2f2-f31b-4005-91d0-92cbcfa7267b" />
+*
 
 ## Project Structure
 
